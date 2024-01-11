@@ -6,6 +6,19 @@ import * as MediaLibrary from 'expo-media-library';
 const Salvar = ({ fotoHidrometro, inscricaoImovel }) => {
   const salvarFotoLocalmente = async () => {
     try {
+      // Criar um diretório para armazenar as fotos localmente (pasta TESTE)
+      const directory = `${FileSystem.documentDirectory}TESTE/`;
+      await FileSystem.makeDirectoryAsync(directory, { intermediates: true });
+
+      // Gerar um nome único para a foto
+      const nomeFoto = `${inscricaoImovel}.jpg`;
+
+      // Construir o caminho de destino da foto
+      const caminhoDestino = `${directory}${nomeFoto}`;
+
+      // Salvar a imagem no diretório TESTE
+      await FileSystem.copyAsync({ from: fotoHidrometro, to: caminhoDestino });
+
       // Adicionar a foto ao rolo da câmera
       await MediaLibrary.saveToLibraryAsync(caminhoDestino);
 
@@ -14,7 +27,6 @@ const Salvar = ({ fotoHidrometro, inscricaoImovel }) => {
       console.error('Erro ao salvar foto do hidrômetro no rolo da câmera:', error);
     }
   };
-
   return (
     <View>
       <TouchableOpacity onPress={salvarFotoLocalmente} style={styles.button}>
@@ -23,7 +35,6 @@ const Salvar = ({ fotoHidrometro, inscricaoImovel }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#3498db',
@@ -38,5 +49,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
 export default Salvar;
