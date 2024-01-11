@@ -6,19 +6,6 @@ import * as MediaLibrary from 'expo-media-library';
 const Salvar = ({ fotoHidrometro, inscricaoImovel }) => {
   const salvarFotoLocalmente = async () => {
     try {
-      // Criar um diretório para armazenar as fotos localmente (pasta TESTE)
-      const directory = `${FileSystem.documentDirectory}TESTE/`;
-      await FileSystem.makeDirectoryAsync(directory, { intermediates: true });
-
-      // Gerar um nome único para a foto
-      const nomeFoto = `${inscricaoImovel}.jpg`;
-
-      // Construir o caminho de destino da foto
-      const caminhoDestino = `${directory}${nomeFoto}`;
-
-      // Salvar a imagem no diretório TESTE
-      await FileSystem.copyAsync({ from: fotoHidrometro, to: caminhoDestino });
-
       // Adicionar a foto ao rolo da câmera
       await MediaLibrary.saveToLibraryAsync(caminhoDestino);
 
