@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal, Image, Button } from 'react-native';
 import { Camera } from 'expo-camera';
 
-const Fotofachada = ({ fotoFachada }) => {
+const Fotofachada = ({ onFotoFachadaCapturada  }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [capturedImage, setCapturedImage] = useState(null);
+  const [capturedImageFachada, setCapturedImageFachada] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -16,12 +16,12 @@ const Fotofachada = ({ fotoFachada }) => {
     })();
   }, []);
 
-  const handleTakePicture = async () => {
+   const handleTakePicture = async () => {
     if (cameraRef) {
       const photo = await cameraRef.takePictureAsync();
-      setCapturedImage(photo.uri);
+      setCapturedImageFachada(photo.uri);
       // Chama a função de callback para passar a foto para o componente pai
-      fotoFachada(photo.uri);
+      onFotoFachadaCapturada (photo.uri);
       setModalVisible(true);
     }
   };
@@ -50,11 +50,11 @@ const Fotofachada = ({ fotoFachada }) => {
       </TouchableOpacity>
 
       <Modal visible={isModalVisible} animationType="slide">
-        {capturedImage ? (
+        {capturedImageFachada ? (
           <View style={{ flex: 1 }}>
-            <Image source={{ uri: capturedImage }} style={{ flex: 1 }} />
+            <Image source={{ uri: capturedImageFachada }} style={{ flex: 1 }} />
             <View style={styles.buttonContainer}>
-              <Button title="Tirar Outra Foto" onPress={() => setCapturedImage(null)} />
+              <Button title="Tirar Outra Foto" onPress={() => setCapturedImageFachada(null)} />
               <Button title="Confirmar" onPress={toggleModal} />
             </View>
           </View>

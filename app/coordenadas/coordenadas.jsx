@@ -9,10 +9,15 @@ import CoordenadasAtuais from '../../components/coordenadas/Coordenadasatuais';
 
 const Coordenadas = () => {
   const [capturedImage, setCapturedImage] = useState(null);
+  const [capturedImageFachada, setCapturedImageFachada] = useState(null);
   const [inscricaoImovel, setInscricaoImovel] = useState('');
 
   const handleFotoCapturada = (capturedPhoto) => {
     setCapturedImage(capturedPhoto);
+  };
+
+  const handleFotoCapturadaFachada = (capturedPhotoFachada) => {
+    setCapturedImageFachada(capturedPhotoFachada);
   };
 
   const handleInscricaoChange = (inscricao) => {
@@ -29,9 +34,9 @@ const Coordenadas = () => {
       />
       <View style={{ flex: 1, padding: 16 }}>
         <Fotohidrometro onFotoCapturada={handleFotoCapturada} />
-        <Fotofachada onFotoCapturada={handleFotoCapturada}/>
+        <Fotofachada onFotoFachadaCapturada={handleFotoCapturadaFachada}/>
         <Inscricao onInscricaoChange={handleInscricaoChange} />
-        <Salvar fotoHidrometro={capturedImage} inscricaoImovel={inscricaoImovel} />
+        <Salvar fotoHidrometro={capturedImage} fotoFachada={capturedImageFachada} inscricaoImovel={inscricaoImovel} />
         <CoordenadasAtuais />
       </View>
     </SafeAreaView>
