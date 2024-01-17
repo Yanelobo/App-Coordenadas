@@ -1,11 +1,24 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { salvarCoordenadasEmArquivo } from './SalvarCoordenadas';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
+import * as Location from 'expo-location';
 
 const Salvar = ({ fotoHidrometro, inscricaoImovel, fotoFachada }) => {
   const salvarFotoHidrometro = async () => {
-    await salvarFotoLocalmente(fotoHidrometro, `${inscricaoImovel}.jpg`);
+    try {
+      // Obter as coordenadas atuais
+      const currentLocation = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = currentLocation.coords;
+  
+      // Salvar a foto do hidrômetro localmente
+      await salvarFotoLocalmente(fotoHidrometro, `${inscricaoImovel}.jpg`);
+      // Salvar as coordenadas em um arquivo de texto
+      await salvarCoordenadasEmArquivo({inscricaoImovel, latitude, longitude});
+    } catch (error) {
+      console.error('Erro ao salvar foto do hidrômetro:', error);
+    }
     
   };
 

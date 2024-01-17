@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal, Image, Button } from 'react-native';
 import { Camera } from 'expo-camera';
 
+
 const Fotohidrometro = ({ onFotoCapturada }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);

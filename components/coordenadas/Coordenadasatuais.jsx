@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import * as Location from 'expo-location';
-import { AsyncStorage } from 'react-native';
 
 const CoordenadasAtuais = () => {
   const [location, setLocation] = useState(null);

@@ -8,6 +8,24 @@
       "expo-router"
     ],
     "name": "App_Coordenadas",
-    "slug": "App_Coordenadas"
+    "slug": "App_Coordenadas",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b3dd8a70-d94d-4511-86d6-c5617a7e0477"
+      }
+    },
+    "android": {
+      "package": "com.yanelobo.App_Coordenadas"
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/b3dd8a70-d94d-4511-86d6-c5617a7e0477"
+    },
+    "ios": {}
   }
 }
